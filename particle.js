@@ -10,8 +10,9 @@
 		bgColor: 'rgba(17,17,19,1)',
 		particleColor: `rgba(255,40,40,1)`,
 		particleRadius: 3,
-		particleCount : 60,
-		particleMaxVelocity: 0.5
+		particleCount : 90,
+		particleMaxVelocity: 1,
+		lineLength : 150
 	};
 	document.querySelector('body').appendChild(canvas);
 	// при резайзе ширина канваса подстроиться под body 
@@ -20,7 +21,6 @@
 		w = canvas.width = innerWidth
 		h = canvas.height = innerHeight
 	}
-
 	class Particle{
 		constructor()
 		{
@@ -47,6 +47,35 @@
 			ctx.closePath();
 		}
 	}
+	
+
+	function drawLines()
+	{
+		let x1,y1,x2,y2,length,opacity;
+		for(let i in particles)
+		{
+			for(let j in particles){
+				x1 = particles[i].x;
+				y1 = particles[i].y;
+				x2 = particles[j].x;
+				y2 = particles[j].y;
+				length = Math.sqrt(Math.pow(x2 - x1,2) + Math.pow(y2 - y1,2))
+				if(length < properties.lineLength)
+				{
+					ctx.lineWidth = "0,5";
+					ctx.strokeStyle ='rgba(255,40,40,1)';
+					ctx.beginPath();
+					ctx.moveTo(x1,y1);
+					ctx.lineTo(x2,y2);
+					ctx.stroke()
+					ctx.closePath();
+				}
+				
+
+			}
+		}
+	}
+
 	function reDrawParticles() // перерисовка всех частиц
 	{
 		for(let i in particles)
@@ -65,6 +94,7 @@
 	function loop(){ // рекурсивная функция отрисовки всех объектов канваса 
 		reDrawBackground();
 		reDrawParticles();
+		drawLines()
 		requestAnimationFrame(loop) // умная отрисовка
 	}
 
@@ -81,3 +111,5 @@
 	init();
 
 })()
+
+
