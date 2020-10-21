@@ -66,7 +66,7 @@
 					if (100000/(length*length*length) > 1){
 						ctx.lineWidth = 1;
 					}else{
-					ctx.lineWidth = 100000/(length*length*length);
+					ctx.lineWidth = 1000000/(length*length*length);
 				}
 					ctx.strokeStyle ='rgba(255,40,40,1)';
 					ctx.beginPath();
