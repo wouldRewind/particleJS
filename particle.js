@@ -21,7 +21,7 @@ const particleSizeAnimate = (particles,maxRadius,minRadius) => {
 	properties = {
 		bgColor: '#B61924',
 		particleColor: `#F1D5D7`,
-		particleCount : 70,
+		particleCount : 30,
 		particleMaxVelocity: 1,
 		lineLength : 150,
 		particleMaxRadius : 5,
