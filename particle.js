@@ -7,8 +7,8 @@
 	h = canvas.height = innerHeight,
 	particles = [],
 	properties = {
-		bgColor: 'rgba(17,17,19,1)',
-		particleColor: `rgba(255,40,40,1)`,
+		bgColor: '#B61924',
+		particleColor: `#F1D5D7`,
 		particleRadius: 3,
 		particleCount : 90,
 		particleMaxVelocity: 1,
@@ -62,13 +62,14 @@
 				length = Math.sqrt(Math.pow(x2 - x1,2) + Math.pow(y2 - y1,2))
 				if(length < properties.lineLength)
 				{
-					
-					if (100000/(length*length*length) > 1){
+					const tripleLength = Math.pow(length,3); // почему бы не вынести повторяющиеся литералы в переменные, Влад?)
+					const hugeNum = 100000; // в чем логика?
+					if (hugeNum/tripleLength > 1){
 						ctx.lineWidth = 1;
 					}else{
-					ctx.lineWidth = 1000000/(length*length*length);
+					ctx.lineWidth = hugeNum/tripleLength;
 				}
-					ctx.strokeStyle ='rgba(255,40,40,1)';
+					ctx.strokeStyle ='#F1D5D7';
 					ctx.beginPath();
 					ctx.moveTo(x1,y1);
 					ctx.lineTo(x2,y2);
