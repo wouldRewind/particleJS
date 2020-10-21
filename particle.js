@@ -62,7 +62,13 @@
 				length = Math.sqrt(Math.pow(x2 - x1,2) + Math.pow(y2 - y1,2))
 				if(length < properties.lineLength)
 				{
-					ctx.lineWidth = "0,5";
+					if(length < properties.lineLength)
+				{
+					if (100000/(length*length*length) > 1){
+						ctx.lineWidth = 1;
+					}else{
+					ctx.lineWidth = 100000/(length*length*length);
+				}
 					ctx.strokeStyle ='rgba(255,40,40,1)';
 					ctx.beginPath();
 					ctx.moveTo(x1,y1);
