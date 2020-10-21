@@ -1,0 +1,20 @@
+{
+  "name": "particle",
+  "version": "1.0.0",
+  "description": "Handmaded particleJS lib",
+  "main": "particle.js",
+  "scripts": {
+	 "test": "test",
+	 "type": "module"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wouldRewind/particleJS.git"
+  },
+  "author": "Nick Suhanov and Vlad Ponomarev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wouldRewind/particleJS/issues"
+  },
+  "homepage": "https://github.com/wouldRewind/particleJS#readme"
+}
