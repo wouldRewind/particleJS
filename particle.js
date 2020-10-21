@@ -1,4 +1,4 @@
-const growSpeed = 0.1;
+const growSpeed = 0.05;
 const particleSizeAnimate = (particles,maxRadius,minRadius) => {
 	particles.forEach(particle => {
 		// если вышли за грани роста :D
