@@ -1,3 +1,13 @@
+const growSpeed = 0.1;
+const particleSizeAnimate = (particles,maxRadius,minRadius) => {
+	particles.forEach(particle => {
+		// если вышли за грани роста :D
+	if(particle.radius >= maxRadius || particle.radius <= minRadius)
+		particle.animDirection*=-1;
+	// приращение
+	particle.radius+=growSpeed * particle.animDirection;
+	})
+}
 
 // Использую IIFFE, чтобы не засорять глоб
 (function()
@@ -7,13 +17,15 @@
 	w = canvas.width = innerWidth,
 	h = canvas.height = innerHeight,
 	particles = [],
+	animatingParticles = [],
 	properties = {
 		bgColor: '#B61924',
 		particleColor: `#F1D5D7`,
-		particleRadius: 3,
-		particleCount : 90,
+		particleCount : 70,
 		particleMaxVelocity: 1,
-		lineLength : 150
+		lineLength : 150,
+		particleMaxRadius : 5,
+		particleMinRadius : 1,
 	};
 	document.querySelector('body').appendChild(canvas);
 	// при резайзе ширина канваса подстроиться под body 
@@ -25,6 +37,9 @@
 	class Particle{
 		constructor()
 		{
+			this.animDirection = 1; // по умолчанию все частички растут
+			this.isAnimating = false; // при создании все частицы не анимируются
+			this.radius = Math.floor(properties.particleMaxRadius * Math.random() + properties.particleMinRadius);
 			this.x = Math.random() * w; // this.x < w
 			this.y = Math.random() * h; // this.y < h
 			this.velocityX = Math.random() * (properties.particleMaxVelocity * 2) - properties.particleMaxVelocity;
@@ -42,7 +57,7 @@
 		reDraw() // перерисовывает частичку
 		{
 			ctx.beginPath();
-			ctx.arc(this.x,this.y,properties.particleRadius,0,Math.PI * 2);
+			ctx.arc(this.x,this.y,this.radius,0,Math.PI * 2); // отрисовка шарика
 			ctx.fillStyle = properties.particleColor; // установка цвета 
 			ctx.fill(); // залив
 			ctx.closePath();
@@ -66,7 +81,7 @@
 					const tripleLength = Math.pow(length,3); // почему бы не вынести повторяющиеся литералы в переменные, Влад?)
 					const hugeNum = 100000; // в чем логика?
 					if (hugeNum/tripleLength > 1){
-						ctx.lineWidth = 1;
+						ctx.lineWidth = 0.5;
 					}else{
 					ctx.lineWidth = hugeNum/tripleLength;
 				}
@@ -101,6 +116,7 @@
 	function loop(){ // рекурсивная функция отрисовки всех объектов канваса 
 		reDrawBackground();
 		reDrawParticles();
+		particleSizeAnimate(particles,properties.particleMaxRadius,properties.particleMinRadius)
 		drawLines()
 		requestAnimationFrame(loop) // умная отрисовка
 	}
