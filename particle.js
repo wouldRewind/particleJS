@@ -62,8 +62,7 @@
 				length = Math.sqrt(Math.pow(x2 - x1,2) + Math.pow(y2 - y1,2))
 				if(length < properties.lineLength)
 				{
-					if(length < properties.lineLength)
-				{
+					
 					if (100000/(length*length*length) > 1){
 						ctx.lineWidth = 1;
 					}else{
