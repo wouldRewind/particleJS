@@ -1,13 +1,4 @@
-const growSpeed = 0.1;
-const particleSizeAnimate = (particles,maxRadius,minRadius) => {
-	particles.forEach(particle => {
-		// если вышли за грани роста :D
-	if(particle.radius >= maxRadius || particle.radius <= minRadius)
-		particle.animDirection*=-1;
-	// приращение
-	particle.radius+=growSpeed * particle.animDirection;
-	})
-}
+import {particleSizeAnimate} from "./modules/particleSizeAnimation.js"
 
 // Использую IIFFE, чтобы не засорять глоб
 (function()
